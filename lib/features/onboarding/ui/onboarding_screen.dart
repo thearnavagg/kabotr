@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kabotr/features/auth/ui/auth_register_screen.dart';
 import 'package:kabotr/themes/app_images.dart';
 import 'package:onboarding/onboarding.dart';
 
@@ -27,9 +28,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: Column(
             children: [
               Image.asset(AppImages.kingqueen),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 45),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 45.0, vertical: 45),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -40,7 +42,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.0),
+                padding: const EdgeInsets.symmetric(horizontal: 45.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -50,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 150,
               ),
             ],
@@ -72,9 +74,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: Column(
             children: [
               Image.asset(AppImages.letter),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 45),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 45.0, vertical: 45),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -85,7 +88,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 45.0, vertical: 10.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -95,7 +99,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 150,
               )
             ],
@@ -117,11 +121,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: Column(
             children: [
               Image.asset(AppImages.logo),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 45.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 45.0, vertical: 45.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -132,7 +137,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 45.0, vertical: 10.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -142,7 +148,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 150,
               ),
             ],
@@ -188,11 +194,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       color: defaultProceedButtonColor,
       child: InkWell(
         borderRadius: defaultProceedButtonBorderRadius,
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,MaterialPageRoute(builder: (context) => AuthRegisterScreen()));
+        },
         child: const Padding(
           padding: defaultProceedButtonPadding,
           child: Text(
-            'Sign up',
+            'Authenticate',
             style: defaultProceedButtonTextStyle,
           ),
         ),
