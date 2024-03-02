@@ -195,7 +195,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: InkWell(
         borderRadius: defaultProceedButtonBorderRadius,
         onTap: () {
-          Navigator.push(context,MaterialPageRoute(builder: (context) => AuthRegisterScreen()));
+          Navigator.push(context,MaterialPageRoute(builder: (context) => const AuthRegisterScreen()));
         },
         child: const Padding(
           padding: defaultProceedButtonPadding,
