@@ -1,0 +1,19 @@
+{
+    "cmake.sourceDirectory": "C:/Users/arnav/OneDrive/articles/Desktop/Coding/flutter/kabotr/windows/flutter",
+    "cmake.options.advanced": {
+        "build": {
+            "statusBarVisibility": "inherit",
+            "inheritDefault": "visible"
+        },
+        "launch": {
+            "statusBarVisibility": "inherit",
+            "inheritDefault": "visible"
+        },
+        "debug": {
+            "statusBarVisibility": "inherit",
+            "inheritDefault": "visible"
+        }
+    },
+    "cmake.options.statusBarVisibility": "hidden",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
