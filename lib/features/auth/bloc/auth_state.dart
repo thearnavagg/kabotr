@@ -1,4 +1,5 @@
-part of 'auth_bloc.dart';
+
+import 'package:flutter/material.dart';
 
 @immutable
 sealed class AuthState {}
@@ -9,8 +10,9 @@ abstract class AuthActionState extends AuthState {}
 
 class AuthErrorState extends AuthActionState {
   final String error;
-
-  AuthErrorState({required this.error});
+  AuthErrorState({
+    required this.error,
+  });
 }
 
-class AuthSuccessState extends AuthActionState{}
+class AuthSuccessState extends AuthActionState {}
