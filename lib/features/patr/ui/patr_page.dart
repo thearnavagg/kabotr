@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kabotr/features/create_patr/ui/create_patr_page.dart';
 import 'package:kabotr/features/patr/bloc/patr_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:kabotr/themes/app_images.dart';
+import 'package:kabotr/themes/splash_screen.dart';
 
 
 class PatrPage extends StatefulWidget {
@@ -24,16 +26,19 @@ class _PatrPageState extends State<PatrPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CreatePatrPage(
-                        patrBloc: patrBloc,
-                      )));
-        },
-        child: const Icon(Icons.add),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 5),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CreatePatrPage(
+                          patrBloc: patrBloc,
+                        )));
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: BlocConsumer<PatrBloc, PatrState>(
@@ -48,11 +53,8 @@ class _PatrPageState extends State<PatrPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
-                    children: [
-                      // LOGO
-                                    
-                      const Center(child: FlutterLogo()), // TO-DO: to edit this
-                                    
+                    children: <Widget>[
+                      Center(child: PatrPageLogo()),
                       Expanded(
                         child: ListView.separated(
                           itemCount: successState.patrs.length,
@@ -119,7 +121,7 @@ class _PatrPageState extends State<PatrPage> {
               );
 
             case PatrsLoadState:
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: SplashScreen());
             default:
               return const SizedBox();
           }

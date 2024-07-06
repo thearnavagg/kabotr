@@ -11,25 +11,22 @@ class SharedPreferencesManager {
 
   static SharedPreferences get instance {
     if (!_initialized) {
-      throw Exception(
-          "SharedPreferencesManager has not been initialized");
+      throw Exception("SharedPreferencesManager has not been initialized");
     }
     return _prefs;
   }
 
   static Future<void> saveUid(String uid) async {
     if (!_initialized) {
-      throw Exception(
-          "SharedPreferencesManager has not been initialized");
+      throw Exception("SharedPreferencesManager has not been initialized");
     }
     await _prefs.setString('uid', uid);
   }
 
-  static String getUid() {
+  static Future<String?> getUid() async {
     if (!_initialized) {
-      throw Exception(
-          "SharedPreferencesManager has not been initialized");
+      throw Exception("SharedPreferencesManager has not been initialized");
     }
-    return _prefs.getString('uid') ?? '';
+    return _prefs.getString('uid');
   }
 }

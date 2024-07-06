@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kabotr/core/local_db/shared_pref_manager.dart';
 import 'package:kabotr/features/onboarding/ui/onboarding_screen.dart';
 import 'package:kabotr/features/patr/ui/patr_page.dart';
+import 'package:kabotr/themes/splash_screen.dart';
 
 class DecidePage extends StatefulWidget {
   static final StreamController<String?> authStream =
@@ -14,6 +15,8 @@ class DecidePage extends StatefulWidget {
 }
 
 class _DecidePageState extends State<DecidePage> {
+  bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
@@ -21,12 +24,24 @@ class _DecidePageState extends State<DecidePage> {
   }
 
   Future<void> getUid() async {
-    String? uid = await SharedPreferencesManager
-        .getUid(); // Ensure this method is async and returns Future<String?>
-    if (uid == null || uid.isEmpty) {
+    print('Fetching UID...');
+    try {
+      String? uid = await SharedPreferencesManager.getUid();
+      print('UID fetched: $uid');
+      if (uid == null || uid.isEmpty) {
+        DecidePage.authStream.add(null);
+        print('Added null to authStream');
+      } else {
+        DecidePage.authStream.add(uid);
+        print('Added $uid to authStream');
+      }
+    } catch (e) {
+      print('Error fetching UID: $e');
       DecidePage.authStream.add(null);
-    } else {
-      DecidePage.authStream.add(uid);
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -36,9 +51,17 @@ class _DecidePageState extends State<DecidePage> {
       stream: DecidePage.authStream.stream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-              child:
-                  CircularProgressIndicator()); // Show a loading indicator while waiting for data
+          return FutureBuilder(
+            future:
+                Future.delayed(const Duration(seconds: 5)), 
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SplashScreen(); 
+              } else {
+                return const OnboardingScreen();
+              }
+            },
+          );
         }
         if (snapshot.hasData &&
             snapshot.data != null &&
@@ -54,7 +77,7 @@ class _DecidePageState extends State<DecidePage> {
   @override
   void dispose() {
     DecidePage.authStream
-        .close(); // Close the stream when the widget is disposed
+        .close();
     super.dispose();
   }
 }
