@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:kabotr/core/local_db/shared_pref_manager.dart';
 import 'package:kabotr/features/onboarding/ui/onboarding_screen.dart';
@@ -24,19 +25,19 @@ class _DecidePageState extends State<DecidePage> {
   }
 
   Future<void> getUid() async {
-    print('Fetching UID...');
+    log('Fetching UID...');
     try {
       String? uid = await SharedPreferencesManager.getUid();
-      print('UID fetched: $uid');
+      log('UID fetched: $uid');
       if (uid == null || uid.isEmpty) {
         DecidePage.authStream.add(null);
-        print('Added null to authStream');
+        log('Added null to authStream');
       } else {
         DecidePage.authStream.add(uid);
-        print('Added $uid to authStream');
+        log('Added $uid to authStream');
       }
     } catch (e) {
-      print('Error fetching UID: $e');
+      log('Error fetching UID: $e');
       DecidePage.authStream.add(null);
     } finally {
       setState(() {
