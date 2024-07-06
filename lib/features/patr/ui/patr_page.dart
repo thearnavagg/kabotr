@@ -39,68 +39,82 @@ class _PatrPageState extends State<PatrPage> {
       body: BlocConsumer<PatrBloc, PatrState>(
         bloc: patrBloc,
         listener: (context, state) {
-          // TODO: implement listener
         },
         builder: (context, state) {
           switch (state.runtimeType) {
             case PatrsSuccessState:
               final successState = state as PatrsSuccessState;
-              return Container(
-                margin: const EdgeInsets.only(top: 60),
-                child: Column(
-                  children: [
-                    // LOGO
-
-                    const Center(child: FlutterLogo()), // TO-DO: to edit this
-
-                    // TWEETS
-                    Expanded(
+              return SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      // LOGO
+                                    
+                      const Center(child: FlutterLogo()), // TO-DO: to edit this
+                                    
+                      Expanded(
                         child: ListView.separated(
-                      itemCount: successState.patrs.length,
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(
-                        height: 32,
-                      ),
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.only(left: 16, right: 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                successState.patrs[index].patr.content,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w800),
+                          itemCount: successState.patrs.length,
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(height: 16),
+                          itemBuilder: (context, index) {
+                            int reverseIndex =
+                                successState.patrs.length - 1 - index;
+                            return Card(
+                              elevation: 4,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              const SizedBox(height: 12),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Patred by: ${successState
-                                            .patrs[index].admin.firstName} ${successState
-                                            .patrs[index].admin.lastNAme}",
-                                    style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  Text(
-                                    DateFormat("dd MMMM yyyy hh:mm a").format(
-                                        successState
-                                            .patrs[index].patr.createdAt),
-                                    style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    ))
-                  ],
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      successState
+                                          .patrs[reverseIndex].patrs.content,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Patred by: ${successState.patrs[reverseIndex].admin.firstName} ${successState.patrs[reverseIndex].admin.lastName}",
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        Text(
+                                          DateFormat("dd MMM yyyy, hh:mm a")
+                                              .format(
+                                            successState.patrs[reverseIndex].patrs
+                                                .createdAt,
+                                          ),
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               );
 

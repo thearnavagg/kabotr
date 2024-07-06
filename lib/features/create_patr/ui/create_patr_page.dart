@@ -50,21 +50,23 @@ class _CreatePatrPageState extends State<CreatePatrPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Create Patr",
+                  "Create Patr 🕊️",
                   style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 40),
-                TextField(
-                  controller: contentController,
-                  maxLines: 30,
-                  minLines: 1,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w400),
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Write whats in your mind🤯",
-                    hintStyle:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                Expanded(
+                  child: TextField(
+                    controller: contentController,
+                    maxLines: 30,
+                    minLines: 1,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w400),
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Write whats in your mind🤯",
+                      hintStyle:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),

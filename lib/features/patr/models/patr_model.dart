@@ -1,23 +1,23 @@
 import 'dart:convert';
 
 class PatrModel {
-  final PatrDataModel patr;
+  final PatrDataModel patrs;
   final AdminDataModel admin;
   PatrModel({
-    required this.patr,
+    required this.patrs,
     required this.admin,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'patr': patr.toMap(),
+      'patrs': patrs.toMap(),
       'admin': admin.toMap(),
     };
   }
 
   factory PatrModel.fromMap(Map<String, dynamic> map) {
     return PatrModel(
-      patr: PatrDataModel.fromMap(map['patr']),
+      patrs: PatrDataModel.fromMap(map['patrs']),
       admin: AdminDataModel.fromMap(map['admin']),
     );
   }
@@ -31,13 +31,13 @@ class PatrModel {
 class AdminDataModel {
   final String uid;
   final String firstName;
-  final String lastNAme;
+  final String lastName;
   final String email;
   // final DateTime createdAt;
   AdminDataModel({
     required this.uid,
     required this.firstName,
-    required this.lastNAme,
+    required this.lastName,
     required this.email,
     // required this.createdAt,
   });
@@ -46,7 +46,7 @@ class AdminDataModel {
     return {
       'uid': uid,
       'firstName': firstName,
-      'lastNAme': lastNAme,
+      'lastName': lastName,
       'email': email,
       // 'createdAt': createdAt.toIso8601String(),
     };
@@ -56,7 +56,7 @@ class AdminDataModel {
     return AdminDataModel(
       uid: map['uid'] ?? '',
       firstName: map['firstName'] ?? '',
-      lastNAme: map['lastNAme'] ?? '',
+      lastName: map['lastName'] ?? '',
       email: map['email'] ?? '',
       // createdAt: DateTime.parse(map['createdAt']),
     );
@@ -69,12 +69,12 @@ class AdminDataModel {
 }
 
 class PatrDataModel {
-  final String patrId;
+  final String patrsId;
   final String content;
   final DateTime createdAt;
   final String adminId;
   PatrDataModel({
-    required this.patrId,
+    required this.patrsId,
     required this.content,
     required this.createdAt,
     required this.adminId,
@@ -82,7 +82,7 @@ class PatrDataModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'patrId': patrId,
+      'patrsId': patrsId,
       'content': content,
       'createdAt': createdAt.toIso8601String(),
       'adminId': adminId,
@@ -91,7 +91,7 @@ class PatrDataModel {
 
   factory PatrDataModel.fromMap(Map<String, dynamic> map) {
     return PatrDataModel(
-      patrId: map['patrId'] ?? '',
+      patrsId: map['patrsId'] ?? '',
       content: map['content'] ?? '',
       createdAt: DateTime.parse(map['createdAt']),
       adminId: map['adminId'] ?? '',

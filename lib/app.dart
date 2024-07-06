@@ -1,14 +1,12 @@
-// import 'dart:async';
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:kabotr/core/local_db/shared_pref_manager.dart';
 import 'package:kabotr/features/onboarding/ui/onboarding_screen.dart';
 import 'package:kabotr/features/patr/ui/patr_page.dart';
 
 class DecidePage extends StatefulWidget {
-  static StreamController<String?> authStream = StreamController.broadcast();
+  static final StreamController<String?> authStream =
+      StreamController<String?>.broadcast();
   const DecidePage({super.key});
 
   @override
@@ -18,15 +16,15 @@ class DecidePage extends StatefulWidget {
 class _DecidePageState extends State<DecidePage> {
   @override
   void initState() {
-    getUid();
     super.initState();
+    getUid();
   }
 
-  getUid() async {
-    String uid = SharedPreferencesManager.getUid();
-
-    if (uid.isEmpty) {
-      DecidePage.authStream.add("");
+  Future<void> getUid() async {
+    String? uid = await SharedPreferencesManager
+        .getUid(); // Ensure this method is async and returns Future<String?>
+    if (uid == null || uid.isEmpty) {
+      DecidePage.authStream.add(null);
     } else {
       DecidePage.authStream.add(uid);
     }
@@ -35,13 +33,28 @@ class _DecidePageState extends State<DecidePage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<String?>(
-        stream: DecidePage.authStream.stream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return PatrPage();
-          } else {
-            return OnboardingScreen();
-          }
-        });
+      stream: DecidePage.authStream.stream,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+              child:
+                  CircularProgressIndicator()); // Show a loading indicator while waiting for data
+        }
+        if (snapshot.hasData &&
+            snapshot.data != null &&
+            snapshot.data!.isNotEmpty) {
+          return const PatrPage();
+        } else {
+          return const OnboardingScreen();
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    DecidePage.authStream
+        .close(); // Close the stream when the widget is disposed
+    super.dispose();
   }
 }

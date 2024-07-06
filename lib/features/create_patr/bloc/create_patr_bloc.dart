@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:kabotr/features/create_patr/repos/create_patr_repo.dart';
-import 'package:meta/meta.dart';
 import 'package:uuid/uuid.dart';
 
 part 'create_patr_event.dart';
